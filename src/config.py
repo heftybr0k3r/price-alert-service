@@ -2,7 +2,7 @@ import os
 
 
 DEBUG = True
-ADMINS = frozenset( #unordered
+ADMINS = frozenset(
     [
         os.env.get("ADMIN_EMAIL")
     ]
