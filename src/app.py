@@ -5,7 +5,7 @@ from src.common.database import Database
 __author__ = "Ádám"
 
 app = Flask(__name__)
-app.config.from_object('config.py')
+app.config.from_object('src.config.py')
 app.secret_key = "123"
 
 @app.before_first_request
