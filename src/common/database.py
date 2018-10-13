@@ -9,7 +9,7 @@ class Database(object):
     @staticmethod
     def initialize():
         client = pymongo.MongoClient(Database.URL)
-        Database.DATABASE = client['DBNAME']
+        Database.DATABASE = client[os.environ.get("DBNAME")]
 
     @staticmethod
     def insert(collection, data):
