@@ -12,7 +12,7 @@ A webapplikáció különböző technológiák együttesével képes ellátni fe
 
 ![Értesítéskérések](readme-files/értesítések_git.png)
 
-![Értesítések_részletes] (readme-files/értesítésel_részletes_git.png)
+![Értesítések_részletes] (readme-files/értesítések_részletes_git.png)
 
 ![Regisztráció] (readme-files/regisztráció_git.png)
 
