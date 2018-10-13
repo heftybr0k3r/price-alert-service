@@ -12,8 +12,8 @@ A webapplikáció különböző technológiák együttesével képes ellátni fe
 
 ![Értesítéskérések](readme-files/ertesitesek_git.png)
 
-![Értesítések_részletes] (readme-files/ertesitesek_reszletes_git.png)
+![Értesítések_részletes](readme-files/ertesitesek_reszletes_git.png)
 
-![Regisztráció] (readme-files/regisztracio_git.png)
+![Regisztráció](readme-files/regisztracio_git.png)
 
-![Webáruházak] (readme-files/webaruhazak_git.png)
+![Webáruházak](readme-files/webaruhazak_git.png)
