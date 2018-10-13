@@ -1,10 +1,10 @@
 Árértesítő szolgáltatás
 
-A webapp segítségével meghatározott online áruházak esetében adott terméknél az árak automatikus, periodikus ellenőrzésére van lehetőség, majd beállított limit esetén értesíti a felhasználót a kedvezményes ár-ról.
+A webapp segítségével meghatározott online áruházak esetében adott terméknél az árak automatikus, periodikus ellenőrzésére van lehetőség, majd beállított árlimit elérése esetén értesíti a felhasználót a kedvezményes ár-ról.
 
-Webáruházakat csak az adminisztrátor tudja hozzáadni, szerkeszteni, eltávolítani, a felhasználó a betáplált boltok ternékei közül választhat (jelenleg Edigital, iPon, Mall, Xiamoishop, eMag) tetszőleges számút.
+Webáruházakat csak az adminisztrátor tudja hozzáadni, szerkeszteni, eltávolítani, a felhasználó a betáplált boltok termékei közül választhat (jelenleg Edigital, iPon, Mall, Xiamoishop, eMag) tetszőleges számút.
 
-A felhasználó regisztrálás után létrehozhat értesítéseket a különböző támogaott webáruházak termékeihez, módsíthatja az értesítési ár(aka)t, letilthatja vagy törölheti az általa létrehozott értesítésket.
+A felhasználó regisztrálás után létrehozhat értesítéseket a különböző támogaott webáruházak termékeihez, módsíthatja az értesítési ára(ka)t, letilthatja vagy törölheti az általa létrehozott értesítéseket.
 
 Az értesítések egy e-mail API segítségével kerülnek elküldésre a felhasználó regisztrációkor megadott mail címére.
 
