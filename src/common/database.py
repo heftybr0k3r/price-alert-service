@@ -3,7 +3,7 @@ import os
 
 
 class Database(object):
-    URI = os.environ("MONGOLAB_URI")
+    URI = os.environ.get("MONGOLAB_URI")
     DATABASE = None
 
     @staticmethod
