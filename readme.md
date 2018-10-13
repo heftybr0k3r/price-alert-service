@@ -10,14 +10,4 @@ Az értesítések egy e-mail API segítségével kerülnek elküldésre a felhas
 
 A webapplikáció különböző technológiák együttesével képes ellátni feladatát: MongoDB mint adatbázis (NoSQL), Python (alap programozási nyelv), Flask (mikro web-szerver), jinja2 (sablonmotor Pythonhoz), Mailgun (sandbox verzió, e-mail-ek küldéséhez, max. 5 recipiens).
 
-![Home Screen](readme-files/home.png)
-
-![Sign up Screen](readme-files/signup.png)
-
-![Alerts Screen](readme-files/alerts.png)
-
-![Create Alert Screen](readme-files/create_alert.png)
-
-![Stores Screen](readme-files/stores.png)
-
 ![Edit Store Screen](readme-files/edit_store.png)
