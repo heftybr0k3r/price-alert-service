@@ -1,11 +1,16 @@
 from flask import Blueprint
 
-__author__ = 'jslvtr'
+items_blueprint = Blueprint('alerts',__name__)
 
-
-item_blueprint = Blueprint('items', __name__)
-
-
-@item_blueprint.route('/item/<string:name>')
+@items_blueprint.route('/item/<string:name>')
 def item_page(name):
     pass
+
+@items_blueprint.route('/load')
+def load_item():
+    """
+    Load an alerts data using their store and return json representation of it.
+    :return:
+    """
+    pass
+

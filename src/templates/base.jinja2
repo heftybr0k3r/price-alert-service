@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Price Alerts</title>
+    <meta charset="UTF-8">
+    <title>PriceWatcher - Jót, olcsóbban, könyebben...</title>
 
     {% include 'html_dependencies.jinja2' %}
 
 </head>
 <body>
+<nav class="navbar navbar-expand-sm navbar-light bg-warning fixed top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content"
+            aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-<nav class="navbar navbar-fixed-top navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/" title="Home">Pricing</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('stores.index') }}" title="Stores">Stores</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if session['email'] %}
-                    <li><a href="{{ url_for('users.user_alerts') }}" title="Your Alerts"><span class="glyphicon glyphicon-user"></span> Your Alerts</a></li>
-                    <li><a href="{{ url_for('users.logout_user') }}" title="Log Out"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('users.register_user') }}" title="Sign up"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
-                    <li><a href="{{ url_for('users.login_user') }}" title="Log in"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
-                {% endif %}
-            </ul>
-            ​
-        </div>
+    <!-- Brand -->
+    <a class="navbar-brand" href="/">PriceWatcher</a>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse justify-cotent center" id="nav-content">
+        <ul class="navbar-nav">
+            <li class="active">
+                <a class="nav-link" href="{{ url_for("stores.index") }}"><i class="fa fa-shopping-cart"></i>&nbsp&nbspWebáruházak</a></span>
+            </li>
+            {% if session['email'] %}
+                <li class="active ">
+                    <a class="nav-link" href="{{ url_for("users.user_alerts") }}"><i class="fa fa-tag"></i>&nbsp&nbspÉrtesítéseid</a>
+                </li>
+                <li class="active ">
+                    <a class="nav-link" href="{{ url_for("users.logout_user") }}"><i class="fa fa-sign-out"></i>&nbsp&nbspKijelentkezés</a>
+                </li>
+            {% else %}
+
+                <li class="active ">
+                    <a class="nav-link" href="{{ url_for("users.register_user") }}"><i class="fa fa-database"></i>&nbsp&nbspRegisztráció</a>
+                </li>
+                <li class="active ">
+                    <a class="nav-link" href={{ url_for("users.login_user") }}><i class="fa fa-sign-in"></i>&nbsp&nbspBejelentkezés</a>
+                </li>
+                </ul>
+            {% endif %}
+
     </div>
 </nav>
 
-<div class="content container">
+<div class="container">
+    <br>
+    <br>
+    <br>
     {% block content %}
+
 
     {% endblock %}
 </div>
-
 </body>
 </html>

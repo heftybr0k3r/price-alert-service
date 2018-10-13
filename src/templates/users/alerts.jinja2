@@ -1,23 +1,21 @@
 {% extends "base.jinja2" %}
 {% block content %}
-    <div class="page-header">
-        <h1>Alerts
-            <small>showing already existing alerts</small>
-        </h1>
+    <div class="page header">
+        <h2 style="font-family: Lato;text-align:justify;">Értesítéskérések
+            <small style="font-size:20px;"> meglévő értesítési kéréseid</small>
+        </h2>
     </div>
-    <div class="list-group">
-        {% for alert in alerts %}
-            <a href="/alerts/{{ alert._id }}"
-               class="list-group-item {{ 'list-group-item-warning' if not alert.active else '' }}">
-                <h4 class="list-group-item-heading">
-                    {{ "<span class='glyphicon glyphicon-remove-circle'></span> " if not alert.active else '' }}
-                    Alert for {{ alert.item.name }}
-                </h4>
-                <p class="list-group-item-text">Last price found <strong>£{{ alert.item.price }}</strong><br/>Last
-                    checked on <strong>{{ alert.last_checked.strftime("%d-%m-%Y %H:%M") }}</strong></p>
+        <div class="list-group">
+            {% for alert in alerts %}
+                <a href="{{ url_for('alerts.get_alert_page',alert_id=alert._id) }}" class="list-group-item {{ 'list-group-item-warning' if not alert.active else 'list-group-item-success' }}">
+                    {{ '<i class="fa fa-times"></i>&nbsp' if not alert.active else '' }}<h4 class="list-group-item-heading">Értesítéskérés: <strong>{{ alert.item.name }}</strong></h4>
+                    <p class="list-group-item-text">Utolsó szinkronizált ár: <strong>{{  alert.price_for_alertshow()}}</strong><br>
+                        Utoljára ellenőrizve: <strong>{{ alert.last_checked.strftime("%G-%m-%d, %H:%M")}}</strong>
+                    </p>
             </a>
-        {% endfor %}
-    </div>
-    <a class="btn btn-success" href="{{ url_for('alerts.create_alert') }}"><span
-            class="glyphicon glyphicon-plus"></span> Create new</a>
+                <br>
+            {% endfor %}
+        </div>
+    <a class="btn btn-success" href="{{ url_for('alerts.create_alert') }}"><i class="fa fa-plus"></i>&nbspÚj értesítés</a>
+    <br><br>
 {% endblock %}

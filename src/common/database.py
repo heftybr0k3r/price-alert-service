@@ -1,7 +1,5 @@
 import pymongo
 
-__author__ = 'jslvtr'
-
 
 class Database(object):
     URI = "mongodb://127.0.0.1:27017"
@@ -10,14 +8,14 @@ class Database(object):
     @staticmethod
     def initialize():
         client = pymongo.MongoClient(Database.URI)
-        Database.DATABASE = client['fullstack']
+        Database.DATABASE = client['webdevelop']
 
     @staticmethod
     def insert(collection, data):
         Database.DATABASE[collection].insert(data)
 
     @staticmethod
-    def find(collection, query):
+    def find (collection, query):
         return Database.DATABASE[collection].find(query)
 
     @staticmethod
@@ -26,8 +24,8 @@ class Database(object):
 
     @staticmethod
     def update(collection, query, data):
-        Database.DATABASE[collection].update(query, data, upsert=True)
+        Database.DATABASE[collection].update(query, data, upsert=True )
 
     @staticmethod
     def remove(collection, query):
-        return Database.DATABASE[collection].remove(query)
+        Database.DATABASE[collection].remove(query)

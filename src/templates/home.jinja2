@@ -1,9 +1,19 @@
 {% extends "base.jinja2" %}
 {% block content %}
-    <div class="jumbotron">
-        <h1>Pricing Service</h1>
-        <p>We scan online store websites to alert you of price drops in items that interest you.</p>
-        <p>Just sign up, and get started by adding the URL of an item that you wish to track. We'll do the rest!</p>
-        <p><a class="btn btn-primary btn-lg" href="{{ url_for('users.register_user') }}" role="button">Get started</a></p>
-    </div>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 style="text-align:center; font-family: Lato">PRICE WATCHER<br></h1>
+    <h3 style="font-family: Lato; font-style: italic; text-align: center">Kényelmes vásárlás egy kattintásra tőled...</h3>
+  <p style="font-family: Lato; text-align:justify"><i class="fa fa-check"></i>&nbspGyakran vásárolsz online?</p>
+  <p style="font-family: Lato; text-align:justify"><i class="fa fa-check"></i>&nbspEgy adott webshopból / webáruházból szeretsz vásárolni?</p>
+  <p style="font-family: Lato; text-align:justify"><i class="fa fa-check"></i>&nbspSzereted a kényelmes vásárlást?</p>
+  <p style="font-family: Lato; text-align:justify"><i class="fa fa-check"></i>&nbspKönnyebb beszerzés?</p>
+  <p style="font-family: Lato; text-align:justify"><i class="fa fa-check"></i>&nbspNem akarsz lemaradni egy jó ajánlatról?<br></p>
+    <p style="font-family: Lato; text-align:justify"><i class="fa fa-chevron-right"></i>&nbspEzt az online szolgáltatást neked találták ki.</p>
+    <h4 style="text-align:center; font-family: Lato">Jelenleg támogatott webáruházak: eMag, iPon, Edigital, Mall, Xiaomishop</h4>
+      <p style="font-family: Lato; text-align:justify; font-weight:bold;"><br>Megtakarítás néhány egyszerű lépésben:</p>
+      <p style="font-family: Lato; text-align:justify">1, Válaszd ki a termék(ek)et.<br>2, Add meg a célára(ka)t.<br>3, A program rendszeres időközönként szkenneli az általad megadott termék(ek) árát.<br>4, E-mailben értesítést kapsz az általad meghatározott ár(ak) elérésekor.<br></p>
+<p style="font-family: Lato; text-align:justify"><a class="btn btn-primary btn-lg" href="{{ url_for('users.register_user')}}" role="button"><i class="fa fa-database"></i>&nbsp&nbspRegisztráció</a></p>
+</div>
+</div>
 {% endblock %}

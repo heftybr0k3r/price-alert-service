@@ -1,33 +1,41 @@
 {% extends "base.jinja2" %}
 {% block content %}
-    <div class="page-header">
-        <h1>Create Store</h1>
+
+    <div class="'page-header">
+        <h2>Új webáruház hozzáadása</h2>
     </div>
-    <div class="form">
-        <form method="post">
+    <br>
+    <div class="form-size">
+        <form method='post'>
             <div class="form-group">
-                <label for="name">Store name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                <label for="name">Webáruház neve</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Név">
             </div>
             <div class="form-group">
-                <label for="url_prefix">Store URL Prefix</label>
+                <label for="url_prefix">URL prefix a webáruházhoz</label>
                 <input type="text" class="form-control" id="url_prefix" name="url_prefix" placeholder="http://..."
-                aria-describedby="storeURLPrefixHelp">
-                <span id="storeURLPrefixHelp" class="help-block">What characters do URLs of all items in this online store start with?</span>
+                       aria-describedby="StoreURLPrefixHelp">
+                <p id="StoreURLPrefixHelp" class="form-text text-muted">A webáruház alap (base) URL-je, specifikus
+                    hivatkozás nélkül.</p>
             </div>
             <div class="form-group">
-                <label for="tag_name">Tag name</label>
-                <input type="text" class="form-control" id="tag_name" name="tag_name" placeholder="span" value="span"
-                       aria-describedby="tagNameHelp">
-                <span id="tagNameHelp" class="help-block">What is the HTML tag of the item that contains the item price? (usually 'span')</span>
+                <label for="tag_name">Webáruház html tag-je</label>
+                <input type="text" class="form-control" id="tag_name" name="tag_name" placeholder="pl. span"
+                       value="pl. span"
+                       aria-describedby="StoreTagName">
+                <p id="StoreTagName" class="form-text text-muted">A tag neve a html element-nél, általában
+                    <code>span</code>.</p>
             </div>
             <div class="form-group">
-                <label for="query">Query</label>
-                <input type="text" class="form-control" id="query" name="query" placeholder='{"id": "..."}'
-                       aria-describedby="queryHelpBlock">
-                <span id="queryHelpBlock" class="help-block">What JSON query would we have to do to find the specific tag with the price?</span>
+                <label for="query">Webáruház query-je</label>
+                <input type="text" class="form-control" id="query" name="query" placeholder='pl. {"id": "price-now"}'
+                       value='pl. {"id": "price-now"}'
+                       aria-describedby="StoreQuery">
+                <p id="StoreQuery" class="form-text text-muted">A lekéréshez szükséges parancssor (query).</p>
             </div>
-            <button type="submit" class="btn btn-default">Create</button>
+            <button type="submit" class="btn btn-success">Hozzáadás</button>
         </form>
+        <br><br>
     </div>
+
 {% endblock %}
