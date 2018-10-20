@@ -8,29 +8,47 @@ from src.models.items.item import Item
 
 
 class Alert(object):
-    def __init__ (self, user_email, price_limit,  item_id, active=True,  last_checked=None, _id=None):
+    def __init__ (self, user_email, price_limit,  item_id, active=True, sent_alert_count=None, last_checked=None, _id=None):
         self.user_email = user_email
         self.price_limit = price_limit
         self.item = Item.get_by_id(item_id)
         self.last_checked = datetime.now() if last_checked is None else last_checked
         self._id = uuid.uuid4().hex if _id is None else _id
         self.active = active
+        self.sent_alert_count = 0 if sent_alert_count is None else sent_alert_count
 
     def __repr__(self):
-        return "<Riasztás: {}, beállított ár: {} Ft.>".format(self.item.name,self.price_limit)
+        return "<Értesítéskérés: {}, árlimit: {} Ft.>".format(self.item.name,self.price_limit)
 
     def send(self):
+        sa = self.sent_alert_count
+        print("Count: {}.".format(sa))
         str = self.item.url
-        return requests.post(
-            AlertConstants.URL,
-            auth=("api",AlertConstants.API_KEY),
-            data={
-                "from": AlertConstants.FROM,
-                "to": self.user_email,
-                "subject": "{} ára az általad beállítottra csökkent! ".format(self.item.name),
-                "text": "Átirányítás a webshopba -> {} ".format(str, "http://pricing.herokuapp.com/alerts/{}".format(self._id))
-            }
-        )
+        if (sa<5):
+            return requests.post(
+                AlertConstants.URL,
+                auth=("api",AlertConstants.API_KEY),
+                data={
+                    "from": AlertConstants.FROM,
+                    "to": self.user_email,
+                    "subject": "{} ára az általad beállítottra csökkent! ".format(self.item.name),
+                    "text": "Átirányítás a webshopba -> {} ".format(str, "http://arertesito.herokuapp.com/alerts/{}".format(self._id))
+                }
+            )
+        else:
+            self.sent_alert_count = 0
+            self.save_to_mongo()
+            return requests.post(
+                AlertConstants.URL,
+                auth=("api", AlertConstants.API_KEY),
+                data={
+                    "from": AlertConstants.FROM,
+                    "to": self.user_email,
+                    "subject": "{} ára az általad beállítottra csökkent! ".format(self.item.name),
+                    "text": "Utolsó napi értesítő.\nÁtirányítás a webshopba -> {} ".format(str, "http://arertesito.herokuapp.com/alerts/{}".format(self._id))
+                }
+            )
+
 
     @classmethod
     def find_needing_update(cls, minutes_since_update=AlertConstants.ALERT_TIMEOUT):
@@ -40,6 +58,9 @@ class Alert(object):
                                                   {"$lte": last_updated_limit},
                                                          "active": True
                                                         })]
+    @classmethod
+    def forDatabaseReset(cls):
+        return [cls(**elem) for elem in Database.find(AlertConstants.COLLECTION,{})]
 
     def save_to_mongo(self):
             Database.update(AlertConstants.COLLECTION, {"_id": self._id}, self.json())
@@ -51,7 +72,8 @@ class Alert(object):
         "last_checked": self.last_checked,
         "user_email": self.user_email, # csak mailjét használjuk
         "item_id": self.item._id, # _ = protected member
-        "active": self.active
+        "active": self.active,
+        "sent_alert_count": self.sent_alert_count
         }
 
     def load_item_price(self):
@@ -94,6 +116,9 @@ class Alert(object):
 
     def send_email_if_price_reached(self):
         print("self item in float: {}".format(self.item.price))
+        self.sent_alert_count = self.sent_alert_count+1
+        print(self.sent_alert_count)
+        self.save_to_mongo()
         if self.item.price < float(self.price_limit):
             print(self.user_email)
             self.send()
