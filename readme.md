@@ -10,6 +10,28 @@ Az értesítések egy e-mail API segítségével kerülnek elküldésre a felhas
 
 A webapplikáció különböző technológiák együttesével képes ellátni feladatát: MongoDB mint adatbázis (NoSQL), Python (alap programozási nyelv), Flask (mikro web-szerver), jinja2 (sablonmotor Pythonhoz), Mailgun (sandbox verzió, e-mail-ek küldéséhez, max. 5 recipiens).
 
+In English:
+
+Price alert service web-app
+
+With this webapp you can set up alerts for different items from various shops, then the application on the server checks the current prices, and if the given price equals the setted up limit it sends an e-mail notification to the user.
+
+Only administrator(s) can add, edit or delete webstores from the database. Users can select one or more items from these webstores:
+(currently supported): Edigital, Emag, iPon, Mall, Xiaomishop).
+
+After registration the given user can create any number of alerts in the program, can modify the price limits for the selected items, can disable or delete the previously made price alert(s).
+
+The alerts are sent by an e-mail API (provider: MailGun, free tier - restricted to only 5 recipient) to the user's e-mail address.
+
+Involved technologies with which the app was built:
+
+-> MongoDB as the database in the backend,
+-> Python as the main programming language,
+-> Flask (micro web-server),
+-> jinja2 (template engine),
+-> MailGun (e-mail API provider).
+
+
 ![Értesítéskérések](readme-files/ertesitesek_git.png)
 
 ![Értesítések_részletes](readme-files/ertesitesek_reszletes_git.png)
