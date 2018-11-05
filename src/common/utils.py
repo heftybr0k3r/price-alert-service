@@ -2,8 +2,6 @@
 from passlib.hash import pbkdf2_sha512
 import re
 
-__author__ = "Zexx"
-
 class Utils(object):
 
     @staticmethod

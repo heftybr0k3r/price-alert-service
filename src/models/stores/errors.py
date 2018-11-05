@@ -1,12 +1,7 @@
 
-__author__ = "Zexx"
-
-
-# Handling the exception @ Store
 class StoreException(Exception):
     def __init__(self, message):
         self.message = message
 
-	
 class StoreNotFoundException(StoreException):
     pass

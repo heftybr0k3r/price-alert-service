@@ -6,10 +6,8 @@ import src.models.alerts.constants as AlertConstants
 from src.common.database import Database
 from src.models.items.item import Item
 
-__author__ = "Zexx"
 
 class Alert(object):
-	# Constructor
     def __init__ (self, user_email, price_limit,  item_id, active=True, sent_alert_count=None, last_checked=None, _id=None):
         self.user_email = user_email
         self.price_limit = price_limit
@@ -19,12 +17,10 @@ class Alert(object):
         self.active = active
         self.sent_alert_count = 0 if sent_alert_count is None else sent_alert_count
 
-	# Representation of the object in string
     def __repr__(self):
         return "<Értesítéskérés: {}, árlimit: {} Ft.>".format(self.item.name,self.price_limit)
 
-    # Sending the alert(s)
-	def send(self):
+    def send(self):
         sa = self.sent_alert_count
         print("Count: {}.".format(sa))
         str = self.item.url
@@ -40,7 +36,6 @@ class Alert(object):
                 }
             )
         else:
-		# if the sent count == 5
             self.sent_alert_count = 0
             self.save_to_mongo()
             return requests.post(
@@ -54,6 +49,7 @@ class Alert(object):
                 }
             )
 
+
     @classmethod
     def find_needing_update(cls, minutes_since_update=AlertConstants.ALERT_TIMEOUT):
         last_updated_limit = datetime.now() - timedelta(minutes=minutes_since_update)
@@ -62,12 +58,10 @@ class Alert(object):
                                                   {"$lte": last_updated_limit},
                                                          "active": True
                                                         })]
-	# Reset the counter, to guarantee next days' send
-	@classmethod
+    @classmethod
     def forDatabaseReset(cls):
         return [cls(**elem) for elem in Database.find(AlertConstants.COLLECTION,{})]
 
-	# Saving to MongoDB
     def save_to_mongo(self):
             Database.update(AlertConstants.COLLECTION, {"_id": self._id}, self.json())
 
@@ -76,12 +70,12 @@ class Alert(object):
         "_id": self._id,
         "price_limit": self.price_limit,
         "last_checked": self.last_checked,
-        "user_email": self.user_email,
-        "item_id": self.item._id,
+        "user_email": self.user_email, # csak mailjét használjuk
+        "item_id": self.item._id, # _ = protected member
         "active": self.active,
         "sent_alert_count": self.sent_alert_count
         }
-	# Loading item prices
+
     def load_item_price(self):
         str = self.item.load_price()
         print(str)
@@ -92,11 +86,11 @@ class Alert(object):
         elif str.find(u'\xa0')!=-1:
             str = str.replace(u'\xa0',".")
         self.item.price = float(str)
-		# Handled @ another location
         # self.last_checked = datetime.now()
         self.item.save_to_mongo()
         self.save_to_mongo()
         return self.item.price
+
 
     def load_item_price_for_alert_edit(self):
         str = self.item.load_price()
@@ -114,14 +108,12 @@ class Alert(object):
         self.send_email_if_price_reached()
         return self.item.price
 
-	# Show the price in Hungarian currency format
     def price_for_alertshow(self):
         price = self.load_item_price()
         price = price * 1000
         price = int(price)
         return "{} Ft.".format(price)
-	
-	# Sending the alert(s)
+
     def send_email_if_price_reached(self):
         print("self item in float: {}".format(self.item.price))
         self.sent_alert_count = self.sent_alert_count+1
@@ -132,26 +124,21 @@ class Alert(object):
             self.send()
             print("Elküldve")
 
-	# Search user per email address
     @classmethod
     def find_by_user_email(cls, user_email):
         return [cls(**elem) for elem in Database.find(AlertConstants.COLLECTION, {"user_email": user_email})]
 
-	# Searching in DB by "id"
     @classmethod
     def find_by_id (cls, alert_id):
         return cls(**Database.find_one(AlertConstants.COLLECTION, {"_id": alert_id}))
 
-	# To deactivating alert(s)
     def deactivate(self):
         self.active = False
         self.save_to_mongo()
-	
-	# To activating alert(s)
+
     def activate(self):
         self.active = True
         self.save_to_mongo()
 
-	# To deleting alert(s)
     def delete(self):
         Database.remove(AlertConstants.COLLECTION, {"_id": self._id})

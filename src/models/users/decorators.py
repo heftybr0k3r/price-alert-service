@@ -1,10 +1,10 @@
 from functools import wraps
+
 from flask import session, redirect, url_for, request
+
 from src.app import app
 
-__author__ = "Zexx"
 
-# Filtering the access to the admin part of the site
 def require_login (func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
@@ -13,7 +13,6 @@ def require_login (func):
         return func(*args, **kwargs)
     return decorated_function # csak deffel ter vissza
 
-# Filtering the access to the admin part of the site
 def require_admin_permission (func):
     @wraps(func)
     def decorated_function(*args, **kwargs):

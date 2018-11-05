@@ -1,16 +1,13 @@
 import uuid
+
 from src.common.database import Database
 from src.common.utils import Utils
 import src.models.users.errors as UserErrors
 from src.models.alerts.alert import Alert
 import src.models.users.constants as UserConstants
 
-__author__ = "Zexx"
-
 
 class User(object):
-
-	# Constructor
     def __init__(self, email, password, _id=None):
         self.email = email
         self.password = password
@@ -23,7 +20,7 @@ class User(object):
     def is_login_valid(email, password):
         """
         verifiyng email password combo as sent by the site forms,
-        is valid or not, checks that the email exists
+        is valid or notm, checks that the email exists
         and the pass associated with it is correct
         :param email: users' mail
         :param password: hashed password (sha512)
