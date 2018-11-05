@@ -1,9 +1,12 @@
 from flask import Blueprint, render_template, request, json, redirect, url_for
-
 from src.models.stores.store import Store
 import src.models.users.decorators as user_decorators
 store_blueprint = Blueprint('stores', __name__)
 
+__author__ = "Zexx"
+
+""" Register the different 
+routes for the parts """
 
 @store_blueprint.route('/')
 def index():

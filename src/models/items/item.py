@@ -1,5 +1,7 @@
 import uuid
 
+__author__ = "Zexx"
+
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -9,8 +11,8 @@ from src.models.stores.store import Store
 
 
 class Item(object):
+	# Constructor
     def __init__(self, name, url, price=None, _id=None):
-
         self.name = name
         self.url = url
         store = Store.find_by_url(url)
@@ -21,9 +23,9 @@ class Item(object):
 
     def __repr__(self):
         return "<{}, URL-je: {}.>".format(self.name, self.url)
-
+	
+	# Loading prices, scraping given webiste with request && BeautifulSoup
     def load_price (self):
-        # <span class="price-new">104,990Ft</span>
         request = requests.get(self.url)
         print(self.url)
         content = request.content
@@ -33,7 +35,7 @@ class Item(object):
         print(self.query)
         element = soup.find(self.tag_name, self.query)
         string_price = element.text.strip()
-        #if (string_price.find(',') == -1):
+        # if (string_price.find(',') == -1):
         string_price.replace(",",".")
         pattern = re.compile("(\d+.\d+)")
         str = string_price.replace(",",".")
@@ -42,6 +44,7 @@ class Item(object):
 
         return self.price
 
+	# Saving to MongoDB
     def save_to_mongo(self):
         # insert json of the object
         Database.update(ItemConstants.COLLECTION, {"_id": self._id}, self.json())

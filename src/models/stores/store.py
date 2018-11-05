@@ -1,3 +1,6 @@
+
+__author__ = "Zexx"
+
 import uuid
 from bs4 import BeautifulSoup
 import requests
@@ -8,7 +11,8 @@ import src.models.stores.errors as StoreErrors
 
 
 class Store(object):
-
+	
+	# Constructor
     def __init__(self, name, url_prefix, tag_name, query, _id=None):
         self.name = name
         self.url_prefix = url_prefix
@@ -35,10 +39,13 @@ class Store(object):
     def save_to_mongo(self):
         Database.update(StoreConstants.COLLECTION, {"_id": self._id}, self.json())
 
+		
+	# Get Store by name
     @classmethod
     def get_by_name(cls, store_name):
         return cls(**Database.find_one(StoreConstants.COLLECTION, {"name": store_name}))
 
+	# Get Store by url_prefix
     @classmethod
     def get_by_url_prefix(cls, url_prefix):
         return cls(**Database.find_one(StoreConstants.COLLECTION, {"url_prefix": {"$regex": '^{}'.format(url_prefix)}}))
@@ -98,5 +105,6 @@ class Store(object):
     def all(cls):
         return [cls(**elem) for elem in Database.find(StoreConstants.COLLECTION, {})]
 
+	# Self explanatory
     def delete(self):
         Database.remove(StoreConstants.COLLECTION, {'_id': self._id})

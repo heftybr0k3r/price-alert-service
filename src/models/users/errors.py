@@ -1,4 +1,7 @@
 
+__author__ = "Zexx"
+
+# Setting up the different exceptions for User class
 class UserError(Exception):
     def __init__(self, message):
         self.message = message

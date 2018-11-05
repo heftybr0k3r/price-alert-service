@@ -1,12 +1,14 @@
 from flask import Blueprint, request, session, redirect, url_for, render_template  # sablonok létrehozásához
 import src.models.users.errors as UserErrors
-
-# view az API endpointja blueprinteket használunk hozzá
 from src.models.alerts.alert import Alert
 from src.models.users.user import User
 import src.models.users.decorators as user_decorator
 
-user_blueprint = Blueprint('users', __name__) # létrehoz egy templatet
+__author__ = "Zexx"
+
+# Registering routes and Blueprints
+
+user_blueprint = Blueprint('users', __name__) # constructing a template
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login_user():
     if request.method == 'POST':
@@ -18,11 +20,11 @@ def login_user():
         try:
             if (User.is_login_valid(email, password)):
                 session['email'] = email
-                return redirect(url_for(".user_alerts")) # átdobja a usert a másik oldalra
+                return redirect(url_for(".user_alerts")) # redirect user
         except UserErrors.UserError as e:
             return e.message
 
-    return render_template("users/login.jinja2") # loginform # azért kívülre ez a mondat, hogyha post a visszatérés és rossz a hashelt jelszó, ne fussunk hibára
+    return render_template("users/login.jinja2") 
 
 @user_blueprint.route('/register', methods = ['GET','POST'])
 def register_user():
@@ -35,7 +37,7 @@ def register_user():
         try:
             if (User.register_user(email, password)):
                 session['email'] = email
-                return redirect(url_for(".user_alerts")) # átdobja a usert a másik oldalra
+                return redirect(url_for(".user_alerts"))
         except UserErrors.UserError as e:
             return e.message
 
@@ -57,5 +59,3 @@ def logout_user():
 @user_blueprint.route('/check_alerts/<string:user_id>')
 def check_user_alert(user_id):
     pass
-
-

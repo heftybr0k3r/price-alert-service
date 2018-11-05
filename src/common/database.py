@@ -1,6 +1,7 @@
 import pymongo
 import os
 
+__author__ = "Zexx"
 
 class Database(object):
     URL = os.environ.get("MONGOLAB_ROSE_URI")

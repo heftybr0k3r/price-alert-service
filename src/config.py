@@ -1,5 +1,6 @@
 import os
 
+__author__ = "Zexx"
 
 DEBUG = True
 ADMINS = frozenset(
