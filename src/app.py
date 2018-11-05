@@ -2,7 +2,7 @@ from flask import Flask, render_template
 
 from src.common.database import Database
 
-__author__ = "Ádám"
+__author__ = "Zexx"
 
 app = Flask(__name__)
 app.config.from_object('src.config')
