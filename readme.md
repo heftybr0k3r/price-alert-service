@@ -4,7 +4,7 @@ A webapp segítségével meghatározott online áruházak esetében adott termé
 
 Webáruházakat csak az adminisztrátor tudja hozzáadni, szerkeszteni, eltávolítani, a felhasználó a betáplált boltok termékei közül választhat (jelenleg Edigital, iPon, Mall, Xiamoishop, eMag) tetszőleges számút.
 
-A felhasználó regisztrálás után létrehozhat értesítéseket a különböző támogaott webáruházak termékeihez, módsíthatja az értesítési ára(ka)t, letilthatja vagy törölheti az általa létrehozott értesítéseket.
+A felhasználó regisztrálás után létrehozhat értesítéseket a különböző támogatott webáruházak termékeihez, módosíthatja az értesítési ára(ka)t, letilthatja vagy törölheti az általa létrehozott értesítéseket.
 
 Az értesítések egy e-mail API segítségével kerülnek elküldésre a felhasználó regisztrációkor megadott mail címére.
 
