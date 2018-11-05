@@ -6,7 +6,6 @@ __author__ = "Zexx"
 
 app = Flask(__name__)
 app.config.from_object('src.config')
-app.secret_key = "123"
 
 @app.before_first_request
 def init_db():
